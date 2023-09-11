@@ -1,5 +1,6 @@
 'use strict';
 
+require ('dotenv').config();
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
@@ -18,7 +19,6 @@ const random = [];
 
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
-
 
   socket.on('joinRoom', (room) => {
     socket.join(room);
@@ -58,5 +58,5 @@ io.on('connection', (socket) => {
 });
 
 http.listen(3000, () => {
-  console.log('listening on port 3000');
+  console.log(process.env.PORT || 3000);
 });
