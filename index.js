@@ -29,30 +29,28 @@ io.on('connection', (socket) => {
       socket.emit('chat message', random);
     }
 
-  console.log('joined room:', room);
-});
-
-  //socket.emit('chat message', messageHistory);
+    console.log('joined room:', room);
+  });
 
   socket.on('disconnect', () => {
     console.log('a user disconnected', socket.id);
   });
 
-  socket.on('chat message', (msg) => {
+  socket.on('chat message general', (msg) => {
     console.log('message: ', msg);
-    if (msg.c === 'general') {
-      general.push(msg);
-    } else if (msg.c === 'random') {
-      random.push(msg);
-    }
 
+    general.push(msg);
     msg.time = new Date().toLocaleTimeString();
+    io.to('general').emit('chat message', general);
 
-    if (msg.c === 'general') {
-      io.to('general').emit('chat message', general);
-    } else if (msg.c === 'random') {
-      io.to('random').emit('chat message', random);
-    }
+  });
+
+  socket.on('chat message random', (msg) => {
+    console.log('message: ', msg);
+
+    random.push(msg);
+    msg.time = new Date().toLocaleTimeString();
+    io.to('random').emit('chat message', random);
 
   });
 });
