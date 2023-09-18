@@ -21,6 +21,8 @@ const rooms = {};
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
+  // chat section 
+  
   socket.on('joinRoom', (room) => {
     socket.join(room);
 
@@ -54,6 +56,8 @@ io.on('connection', (socket) => {
     io.to('random').emit('chat message', random);
 
   });
+
+  // WebRTC section
 
   socket.on("join videochat room", (roomID) => {
     console.log('joined videochat room: ', roomID);
