@@ -11,8 +11,8 @@ const io = require("socket.io")(http, {
   }
 });
 const cors = require('cors');
-
 app.use(cors());
+const port = process.env.PORT || 3000;
 
 const general = [];
 const random = [];
@@ -87,6 +87,6 @@ socket.on("ice-candidate", incoming => {
 
 });
 
-http.listen(3000, () => {
-  console.log(process.env.PORT || 3000);
-});
+app.listen(port, () => {
+  console.log(`App listening at http://localhost:${port}`)
+})

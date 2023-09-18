@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/3adb25b9-9e34-47e7-aeb5-f7ce1c078d53/resourceGroups/mediapalvelin_group/providers/Microsoft.Web/sites/mdds-backend",
+    "appService.deploySubpath": "."
+}
