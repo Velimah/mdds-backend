@@ -1,18 +1,19 @@
 'use strict';
 
 require ('dotenv').config();
+const port = process.env.PORT || 3000;
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
+const cors = require('cors');
+app.use(cors());
 const io = require("socket.io")(http, {
   cors: {
-    origin: "*",
+    origin: "https://mediapalvelin.northeurope.cloudapp.azure.com",
     methods: ["GET", "POST"]
   }
 });
-const cors = require('cors');
-app.use(cors());
-const port = process.env.PORT || 3000;
+app.use(express.static('public'));
 
 const general = [];
 const random = [];
@@ -87,6 +88,6 @@ socket.on("ice-candidate", incoming => {
 
 });
 
-app.listen(port, () => {
+http.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
-})
+});
