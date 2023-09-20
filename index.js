@@ -9,11 +9,11 @@ const cors = require('cors');
 app.use(cors());
 const io = require("socket.io")(http, {
   cors: {
-    origin: "https://mediapalvelin.northeurope.cloudapp.azure.com",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
-app.use(express.static('public'));
+app.use(express.static('frontend'));
 
 const general = [];
 const random = [];
