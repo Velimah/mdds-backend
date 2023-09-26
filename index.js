@@ -46,8 +46,7 @@ io.on('connection', (socket) => {
 
     general.push(msg);
     const currentTime = new Date();
-    const adjustedTime = new Date(currentTime.getTime() + (3 * 60 * 60 * 1000));
-    msg.time = adjustedTime.toLocaleTimeString();
+    msg.time = currentTime.toLocaleTimeString('fi-FI');
     io.to('general').emit('chat message', general);
 
   });
@@ -57,8 +56,7 @@ io.on('connection', (socket) => {
   
     random.push(msg);
     const currentTime = new Date();
-    const adjustedTime = new Date(currentTime.getTime() + (3 * 60 * 60 * 1000));
-    msg.time = adjustedTime.toLocaleTimeString();
+    msg.time = currentTime.toLocaleTimeString('fi-FI');
   
     io.to('random').emit('chat message', random);
   });
