@@ -19,6 +19,7 @@ const general = [];
 const random = [];
 const rooms = {};
 
+
 io.on('connection', (socket) => {
   console.log('a user connected', socket.id);
 
@@ -44,18 +45,22 @@ io.on('connection', (socket) => {
     console.log('message: ', msg);
 
     general.push(msg);
-    msg.time = new Date().toLocaleTimeString();
+    const currentTime = new Date();
+    const adjustedTime = new Date(currentTime.getTime() + (3 * 60 * 60 * 1000));
+    msg.time = adjustedTime.toLocaleTimeString();
     io.to('general').emit('chat message', general);
 
   });
 
   socket.on('chat message random', (msg) => {
     console.log('message: ', msg);
-
+  
     random.push(msg);
-    msg.time = new Date().toLocaleTimeString();
+    const currentTime = new Date();
+    const adjustedTime = new Date(currentTime.getTime() + (3 * 60 * 60 * 1000));
+    msg.time = adjustedTime.toLocaleTimeString();
+  
     io.to('random').emit('chat message', random);
-
   });
 
   // WebRTC section
